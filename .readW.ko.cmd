@@ -1,0 +1,1 @@
+cmd_/home/anmol/linux_239/readW.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/anmol/linux_239/readW.ko /home/anmol/linux_239/readW.o /home/anmol/linux_239/readW.mod.o ;  true
